@@ -20,8 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gurzu.myapplication.R
-import com.gurzu.myapplication.login.components.ForgotPasswordRow
-import com.gurzu.myapplication.login.components.LoginTextFields
+import com.gurzu.myapplication.login.components.LoginForm
 import com.gurzu.myapplication.login.components.ScanQrButton
 import com.gurzu.myapplication.ui.components.textfield.AppTextFieldState
 import com.gurzu.myapplication.ui.components.textfield.rememberAppTextFieldState
@@ -69,10 +68,9 @@ private fun LoginScreenContent(
                 style = MaterialTheme.typography.bodySmall,
                 color = Color(0xFF666666)
             )
-            LoginTextFields(
+            LoginForm(
                 emailState = emailState, passwordState = passwordState
             )
-            ForgotPasswordRow()
             SignInButton(
                 onSignIn = onSignIn
             )

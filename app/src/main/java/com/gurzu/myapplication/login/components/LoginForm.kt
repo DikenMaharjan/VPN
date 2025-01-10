@@ -2,10 +2,9 @@ package com.gurzu.myapplication.login.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text2.input.CodepointTransformation
 import androidx.compose.foundation.text2.input.mask
 import androidx.compose.material3.Icon
@@ -23,19 +22,21 @@ import com.gurzu.myapplication.ui.components.textfield.AppTextFieldState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun LoginTextFields(
+fun LoginForm(
     modifier: Modifier = Modifier,
     emailState: AppTextFieldState,
     passwordState: AppTextFieldState
 ) {
     var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         AppTextField(
             modifier = Modifier.fillMaxWidth(),
             state = emailState
         )
-        Spacer(modifier = Modifier.height(24.dp))
         AppTextField(
             modifier = Modifier.fillMaxWidth(),
             state = passwordState,
@@ -54,5 +55,6 @@ fun LoginTextFields(
                 )
             }
         )
+        ForgotPasswordRow()
     }
 }
