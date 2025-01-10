@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -95,9 +94,7 @@ private fun LoginScreenContent(
                 color = Color(0xFF666666)
             )
             LoginForm(
-                emailState = emailState, passwordState = passwordState
-            )
-            SignInButton(
+                emailState = emailState, passwordState = passwordState,
                 onSignIn = onSignIn
             )
             Spacer(modifier = Modifier)
@@ -109,11 +106,3 @@ private fun Context.showShortToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
-@Composable
-fun SignInButton(modifier: Modifier = Modifier, onSignIn: () -> Unit) {
-    Button(
-        modifier = modifier.fillMaxWidth(), onClick = onSignIn
-    ) {
-        Text("登录")
-    }
-}
