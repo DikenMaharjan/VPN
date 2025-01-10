@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -53,7 +55,12 @@ private fun LoginScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ScanQrButton(modifier = Modifier.align(Alignment.End), onClick = onScanQr)
-            Text("立即登录以访问更快的互联网\n超过120+个位置。")
+            Text(
+                modifier = Modifier.align(Alignment.Start),
+                text = "立即登录以访问更快的互联网\n超过120+个位置。",
+                style = MaterialTheme.typography.bodySmall,
+                color = Color(0xFF666666)
+            )
             LoginTextFields()
             ForgotPasswordRow()
             SignInButton(
