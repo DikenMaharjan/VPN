@@ -1,5 +1,7 @@
 package com.gurzu.myapplication.ui.components.textfield
 
+import android.util.Log
+import android.util.Patterns.EMAIL_ADDRESS
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,12 +11,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.KeyboardType
 
+private const val TAG = "AppTextFieldState"
+
 open class AppTextFieldState(
     val initValue: String,
     val hint: String,
     val textType: TextType,
-    val highlightError: Boolean,
-    val transform: (String) -> String = { it }
+    val highlightError: Boolean
 ) {
     var text by mutableStateOf(initValue)
         protected set
@@ -23,14 +26,21 @@ open class AppTextFieldState(
         protected set
 
     fun updateText(value: String) {
-        text = transform(value)
+        text = value
         isError = false
     }
 
 
     val isValid: Boolean
         get() = textType.run {
-            isError =false
+            Log.e(TAG, "$textType:  $text")
+            isError = when (textType) {
+                TextType.EMAIL -> !text.isValidEmail()
+                TextType.PASSWORD -> !text.isValidPassword()
+                TextType.TEXT -> text.isBlank()
+            }.also {
+                Log.e(TAG, "adf $it: ")
+            }
             !isError
         }
 
@@ -55,13 +65,20 @@ open class AppTextFieldState(
     }
 }
 
+private fun String.isValidEmail(): Boolean {
+    return EMAIL_ADDRESS.matcher(this).matches()
+}
+
+private fun String.isValidPassword(): Boolean {
+    return this.length >= 6
+}
+
 @Composable
 fun rememberAppTextFieldState(
     hint: String,
     initValue: String = "",
     textType: AppTextFieldState.TextType = AppTextFieldState.TextType.TEXT,
-    highlightError: Boolean = true,
-    transform: (String) -> String = { it }
+    highlightError: Boolean = true
 ): AppTextFieldState =
     rememberSaveable(initValue, saver = AppTextFieldState.Saver) {
         AppTextFieldState(
@@ -69,7 +86,6 @@ fun rememberAppTextFieldState(
             hint = hint,
             textType = textType,
             highlightError = highlightError,
-            transform = transform
         )
     }
 

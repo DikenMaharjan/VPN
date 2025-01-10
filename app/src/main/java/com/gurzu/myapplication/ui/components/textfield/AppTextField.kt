@@ -44,7 +44,7 @@ fun AppTextField(
             .border(
                 width = 1.dp,
                 shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primary
+                color = if (state.isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
             )
             .padding(18.dp),
         value = state.text,
