@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
+import com.gurzu.myapplication.login.LoginScreen
 import com.gurzu.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
