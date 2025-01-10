@@ -23,11 +23,17 @@ import com.gurzu.myapplication.R
 import com.gurzu.myapplication.login.components.ForgotPasswordRow
 import com.gurzu.myapplication.login.components.LoginTextFields
 import com.gurzu.myapplication.login.components.ScanQrButton
+import com.gurzu.myapplication.ui.components.textfield.AppTextFieldState
+import com.gurzu.myapplication.ui.components.textfield.rememberAppTextFieldState
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier) {
+    val emailState = rememberAppTextFieldState(hint = "请输入ID/邮箱")
+    val passwordState = rememberAppTextFieldState(hint = "请输入密码")
     LoginScreenContent(
         modifier = modifier,
+        emailState = emailState,
+        passwordState = passwordState,
         onScanQr = {},
         onSignIn = {}
     )
@@ -36,6 +42,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun LoginScreenContent(
     modifier: Modifier = Modifier,
+    emailState: AppTextFieldState,
+    passwordState: AppTextFieldState,
     onScanQr: () -> Unit,
     onSignIn: () -> Unit
 ) {
@@ -61,7 +69,9 @@ private fun LoginScreenContent(
                 style = MaterialTheme.typography.bodySmall,
                 color = Color(0xFF666666)
             )
-            LoginTextFields()
+            LoginTextFields(
+                emailState = emailState, passwordState = passwordState
+            )
             ForgotPasswordRow()
             SignInButton(
                 onSignIn = onSignIn
@@ -75,8 +85,7 @@ private fun LoginScreenContent(
 @Composable
 fun SignInButton(modifier: Modifier = Modifier, onSignIn: () -> Unit) {
     Button(
-        modifier = modifier.fillMaxWidth(),
-        onClick = onSignIn
+        modifier = modifier.fillMaxWidth(), onClick = onSignIn
     ) {
         Text("登录")
     }
