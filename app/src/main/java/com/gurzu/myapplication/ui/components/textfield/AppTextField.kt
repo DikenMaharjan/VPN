@@ -50,7 +50,9 @@ fun AppTextField(
         value = state.text,
         onValueChange = { state.updateText(it) },
         lineLimits = lineLimits,
-        keyboardOptions = keyboardOptions,
+        keyboardOptions = keyboardOptions.copy(
+            keyboardType = state.textType.keyboardType
+        ),
         textStyle = textStyle,
         keyboardActions = keyboardActions,
         codepointTransformation = codepointTransformation,
